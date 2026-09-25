@@ -1,0 +1,126 @@
+{
+ "case_id": "HHG-012",
+ "transaction": "TX_9012",
+ "customer": "CU_017",
+ "trigger": "Risk score",
+ "bank_risk_score": 0.94,
+ "investigation_steps": [
+  {
+   "tool": "cardholder_verification",
+   "why": "Controlled evidence request answered (simulated)",
+   "result": "Cardholder DENIED the transaction"
+  },
+  {
+   "tool": "get_transaction_context",
+   "why": "Start by examining the flagged transaction",
+   "result": "TX_9012: $476, device DV_13, bank risk 0.94"
+  },
+  {
+   "tool": "find_shared_devices",
+   "why": "Check whether this device is shared with other customers",
+   "result": "DV_06: 2 other customers; DV_13: 0 other customers; DV_14: 0 other customers; DV_15: 0 other customers"
+  },
+  {
+   "tool": "get_customer_history",
+   "why": "Need the customer's baseline to judge amount and behaviour",
+   "result": "baseline $68\u00b129, 4 known device(s)"
+  },
+  {
+   "tool": "find_prior_cases",
+   "why": "Have these customers appeared in prior investigations?",
+   "result": "0 closed cases (0 confirmed fraud)"
+  },
+  {
+   "tool": "find_fraud_patterns",
+   "why": "Match the evidence against known fraud patterns",
+   "result": "Account takeover, Behavior deviation"
+  },
+  {
+   "tool": "search_policy",
+   "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+   "result": "P-17 (2.861), P-21 (0.518), P-09 (0.167)"
+  },
+  {
+   "tool": "find_similar_cases",
+   "why": "Case memory: retrieve similar closed investigations",
+   "result": "2 similar closed cases"
+  }
+ ],
+ "graph_evidence": [
+  {
+   "key": "auth",
+   "cat": "Customer history",
+   "weight": 0.15,
+   "text": "4 failed authentication attempts before the transaction."
+  },
+  {
+   "key": "newdev",
+   "cat": "Device analysis",
+   "weight": 0.1,
+   "text": "Device DV_13 had never been used by this customer before."
+  },
+  {
+   "key": "verify",
+   "cat": "Cardholder verification",
+   "weight": 0.35,
+   "text": "Cardholder DENIED the transaction."
+  },
+  {
+   "key": "amount",
+   "cat": "Transaction behavior",
+   "weight": 0.25,
+   "text": "Amount 476 is 14.1\u03c3 above the customer's normal (68\u00b129)."
+  }
+ ],
+ "connected_entities": [
+  "TX_9012",
+  "DV_13"
+ ],
+ "fraud_pattern": [
+  "Account takeover",
+  "Behavior deviation"
+ ],
+ "risk_assessment": "HIGH",
+ "confidence": 0.97,
+ "uncertainty_before": "High",
+ "missing_evidence": [
+  "Cardholder verification",
+  "Device ownership confirmation"
+ ],
+ "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: fraud",
+ "nba_before": {
+  "action": "REQUEST STEP-UP AUTH",
+  "risk": "MEDIUM",
+  "confidence": 0.5,
+  "approval": {
+   "required": false,
+   "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+   "policy_id": "P-09",
+   "route": "None (auto-execute)"
+  }
+ },
+ "additional_evidence": "fraud",
+ "nba_after": {
+  "action": "TEMPORARY CARD BLOCK",
+  "risk": "HIGH",
+  "confidence": 0.97,
+  "approval": {
+   "required": true,
+   "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+   "policy_id": "P-17",
+   "route": "Fraud analyst"
+  }
+ },
+ "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+ "approval_route": "Fraud analyst",
+ "final_decision": "Awaiting analyst approval",
+ "sar_required": false,
+ "sar": null,
+ "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+ "similar_cases_used": [
+  "H-104",
+  "H-105"
+ ],
+ "written_to_graph": true,
+ "graph_backend": "local (in-memory)"
+}

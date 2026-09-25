@@ -1,0 +1,91 @@
+{
+ "case_id": "HHG-008",
+ "transaction": "TX_9008",
+ "customer": "CU_035",
+ "trigger": "Analyst request",
+ "bank_risk_score": 0.85,
+ "investigation_steps": [
+  {
+   "tool": "get_transaction_context",
+   "why": "Start by examining the flagged transaction",
+   "result": "TX_9008: $84.7, device DV_12, bank risk 0.85"
+  },
+  {
+   "tool": "get_customer_history",
+   "why": "Need the customer's baseline to judge amount and behaviour",
+   "result": "baseline $77\u00b135, 1 known device(s)"
+  },
+  {
+   "tool": "find_shared_devices",
+   "why": "Check whether this device is shared with other customers",
+   "result": "DV_12: 2 other customers"
+  },
+  {
+   "tool": "find_prior_cases",
+   "why": "Have these customers appeared in prior investigations?",
+   "result": "1 closed cases (0 confirmed fraud)"
+  },
+  {
+   "tool": "find_fraud_patterns",
+   "why": "Match the evidence against known fraud patterns",
+   "result": "no known pattern"
+  },
+  {
+   "tool": "search_policy",
+   "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+   "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+  },
+  {
+   "tool": "find_similar_cases",
+   "why": "Case memory: retrieve similar closed investigations",
+   "result": "1 similar closed cases"
+  }
+ ],
+ "graph_evidence": [],
+ "connected_entities": [
+  "TX_9008",
+  "DV_12"
+ ],
+ "fraud_pattern": [
+  "Likely legitimate"
+ ],
+ "risk_assessment": "LOW",
+ "confidence": 0.97,
+ "uncertainty_before": "Low",
+ "missing_evidence": [],
+ "additional_evidence_requested": "None needed",
+ "nba_before": {
+  "action": "ALLOW",
+  "risk": "LOW",
+  "confidence": 0.97,
+  "approval": {
+   "required": false,
+   "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+   "policy_id": "P-02",
+   "route": "None (auto-execute)"
+  }
+ },
+ "additional_evidence": null,
+ "nba_after": {
+  "action": "ALLOW",
+  "risk": "LOW",
+  "confidence": 0.97,
+  "approval": {
+   "required": false,
+   "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+   "policy_id": "P-02",
+   "route": "None (auto-execute)"
+  }
+ },
+ "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+ "approval_route": "None (auto-execute)",
+ "final_decision": "Closed (auto-executed (simulated))",
+ "sar_required": false,
+ "sar": null,
+ "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+ "similar_cases_used": [
+  "HHG-003"
+ ],
+ "written_to_graph": true,
+ "graph_backend": "local (in-memory)"
+}

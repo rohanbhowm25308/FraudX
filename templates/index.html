@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FraudX — Agentic Fraud Investigation</title><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕸️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<canvas id="bg"></canvas>
+<header><div class="brand"><b>FraudX</b><span>Agentic fraud investigation on a graph</span></div>
+<div class="badges" id="badges"></div>
+<div class="hb"><button id="hidden" class="ghost">Find hidden connections</button><button id="replay" class="ghost">▶ Replay</button><button id="reset" class="ghost">Reset demo</button><button id="export">Export 20 cases</button></div></header>
+<main>
+<aside class="box"><h3>Benchmark cases</h3><div id="cases"></div></aside>
+<section class="center">
+ <div class="box graphbox"><div class="gh"><h3 id="gtitle">Select a case</h3><div id="ghint"></div></div><svg id="graph"></svg><div id="ninfo">Click any node to inspect it and expand its connections.</div></div>
+ <div class="box tl"><h3>Agent trace — tool calls through the TigerGraph tool layer</h3><div id="trace"></div><div id="timeline"></div></div>
+</section>
+<aside class="box right" id="panel"><p class="empty">Choose a case on the left. The agent will investigate the graph, retrieve policy and past cases, and recommend a next best action.</p></aside>
+</main>
+<script src="{{ url_for('static', filename='bg.js') }}"></script><script src="{{ url_for('static', filename='app.js') }}"></script></body></html>

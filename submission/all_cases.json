@@ -1,0 +1,2371 @@
+[
+ {
+  "case_id": "HHG-001",
+  "transaction": "TX_9001",
+  "customer": "CU_008",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.93,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9001: $255, device DV_07, bank risk 0.93"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_07: 7 other customers; DV_09: 2 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "8 customers: CU_005, CU_006, CU_007, CU_008, CU_009"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "5 closed cases (4 confirmed fraud)"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $51\u00b133, 2 known device(s)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Potential fraud ring, Velocity burst, Connected to confirmed fraud, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-12 (1.61), P-21 (0.518)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "4 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "device",
+    "cat": "Device analysis",
+    "weight": 0.3,
+    "text": "Device DV_07 is linked to 7 other customers."
+   },
+   {
+    "key": "prior",
+    "cat": "Historical cases",
+    "weight": 0.25,
+    "text": "4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108)."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 255 is 6.2\u03c3 above the customer's normal (51\u00b133)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9001",
+   "DV_07",
+   "CU_005",
+   "H-101"
+  ],
+  "fraud_pattern": [
+   "Potential fraud ring",
+   "Velocity burst",
+   "Connected to confirmed fraud",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.93,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst \u2192 Team lead",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": true,
+  "sar": {
+   "sar_id": "SAR-HHG-001",
+   "status": "Draft generated (simulated)",
+   "subject": "CU_008",
+   "narrative": "Suspicious activity related to transaction TX_9001 ($255). Device DV_07 is linked to 7 other customers. 4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108). Amount 255 is 6.2\u03c3 above the customer's normal (51\u00b133). 4 transactions in the last hour (baseline \u22481).",
+   "reference": "Bank Secrecy Act, 31 CFR 1020.320"
+  },
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-101",
+   "H-102",
+   "H-103",
+   "H-106",
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-002",
+  "transaction": "TX_9002",
+  "customer": "CU_017",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.9,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder DENIED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9002: $476, device DV_15, bank risk 0.9"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_06: 2 other customers; DV_13: 0 other customers; DV_14: 0 other customers; DV_15: 0 other customers"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $68\u00b129, 4 known device(s)"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "0 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Account takeover, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-21 (0.518), P-09 (0.167)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "2 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "auth",
+    "cat": "Customer history",
+    "weight": 0.15,
+    "text": "4 failed authentication attempts before the transaction."
+   },
+   {
+    "key": "newdev",
+    "cat": "Device analysis",
+    "weight": 0.1,
+    "text": "Device DV_15 had never been used by this customer before."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": 0.35,
+    "text": "Cardholder DENIED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 476 is 14.1\u03c3 above the customer's normal (68\u00b129)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9002",
+   "DV_15"
+  ],
+  "fraud_pattern": [
+   "Account takeover",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: fraud",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "fraud",
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.97,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-104",
+   "H-105"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-003",
+  "transaction": "TX_9003",
+  "customer": "CU_035",
+  "trigger": "Risk score",
+  "bank_risk_score": 0.82,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9003: $84.7, device DV_12, bank risk 0.82"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $77\u00b135, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_12: 2 other customers"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "0 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "no known pattern"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "0 similar closed cases"
+   }
+  ],
+  "graph_evidence": [],
+  "connected_entities": [
+   "TX_9003",
+   "DV_12"
+  ],
+  "fraud_pattern": [
+   "Likely legitimate"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-004",
+  "transaction": "TX_9004",
+  "customer": "CU_038",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.76,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder CONFIRMED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9004: $325.0, device DV_03, bank risk 0.76"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $130\u00b117, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "0 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Velocity burst, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "1 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "6 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": -0.5,
+    "text": "Cardholder CONFIRMED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 325.0 is 11.5\u03c3 above the customer's normal (130\u00b117)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9004",
+   "DV_03"
+  ],
+  "fraud_pattern": [
+   "Velocity burst",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: legit",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "legit",
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-005",
+  "transaction": "TX_9005",
+  "customer": "CU_026",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.58,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9005: $137.4, device DV_03, bank risk 0.58"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $51\u00b127, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "1 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW + MONITOR)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "4 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.2,
+    "text": "Amount 137.4 is 3.2\u03c3 above the customer's normal (51\u00b127)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9005",
+   "DV_03",
+   "CU_038",
+   "HHG-004"
+  ],
+  "fraud_pattern": [
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.78,
+  "uncertainty_before": "Medium",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-004",
+   "H-106",
+   "H-107",
+   "H-109"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-006",
+  "transaction": "TX_9006",
+  "customer": "CU_005",
+  "trigger": "Risk score",
+  "bank_risk_score": 0.91,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9006: $670, device DV_07, bank risk 0.91"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_06: 2 other customers; DV_07: 7 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "8 customers: CU_005, CU_006, CU_007, CU_008, CU_009"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "5 closed cases (4 confirmed fraud)"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $134\u00b118, 2 known device(s)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Potential fraud ring, Velocity burst, Connected to confirmed fraud, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-12 (1.61), P-21 (0.518)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "4 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "device",
+    "cat": "Device analysis",
+    "weight": 0.3,
+    "text": "Device DV_07 is linked to 7 other customers."
+   },
+   {
+    "key": "prior",
+    "cat": "Historical cases",
+    "weight": 0.25,
+    "text": "4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108)."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 670 is 29.8\u03c3 above the customer's normal (134\u00b118)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9006",
+   "DV_07",
+   "CU_006",
+   "H-102"
+  ],
+  "fraud_pattern": [
+   "Potential fraud ring",
+   "Velocity burst",
+   "Connected to confirmed fraud",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.93,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst \u2192 Team lead",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": true,
+  "sar": {
+   "sar_id": "SAR-HHG-006",
+   "status": "Draft generated (simulated)",
+   "subject": "CU_005",
+   "narrative": "Suspicious activity related to transaction TX_9006 ($670). Device DV_07 is linked to 7 other customers. 4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108). Amount 670 is 29.8\u03c3 above the customer's normal (134\u00b118). 4 transactions in the last hour (baseline \u22481).",
+   "reference": "Bank Secrecy Act, 31 CFR 1020.320"
+  },
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-101",
+   "H-102",
+   "H-103",
+   "H-106",
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-007",
+  "transaction": "TX_9007",
+  "customer": "CU_017",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.91,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder DENIED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9007: $476, device DV_14, bank risk 0.91"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_06: 2 other customers; DV_13: 0 other customers; DV_14: 0 other customers; DV_15: 0 other customers"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $68\u00b129, 4 known device(s)"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "0 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Account takeover, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-21 (0.518), P-09 (0.167)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "2 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "auth",
+    "cat": "Customer history",
+    "weight": 0.15,
+    "text": "4 failed authentication attempts before the transaction."
+   },
+   {
+    "key": "newdev",
+    "cat": "Device analysis",
+    "weight": 0.1,
+    "text": "Device DV_14 had never been used by this customer before."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": 0.35,
+    "text": "Cardholder DENIED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 476 is 14.1\u03c3 above the customer's normal (68\u00b129)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9007",
+   "DV_14"
+  ],
+  "fraud_pattern": [
+   "Account takeover",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: fraud",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "fraud",
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.97,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-104",
+   "H-105"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-008",
+  "transaction": "TX_9008",
+  "customer": "CU_035",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.85,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9008: $84.7, device DV_12, bank risk 0.85"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $77\u00b135, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_12: 2 other customers"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "1 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "no known pattern"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "1 similar closed cases"
+   }
+  ],
+  "graph_evidence": [],
+  "connected_entities": [
+   "TX_9008",
+   "DV_12"
+  ],
+  "fraud_pattern": [
+   "Likely legitimate"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-003"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-009",
+  "transaction": "TX_9009",
+  "customer": "CU_038",
+  "trigger": "Risk score",
+  "bank_risk_score": 0.8,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder CONFIRMED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9009: $325.0, device DV_03, bank risk 0.8"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $130\u00b117, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "2 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Velocity burst, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "3 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "6 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": -0.5,
+    "text": "Cardholder CONFIRMED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 325.0 is 11.5\u03c3 above the customer's normal (130\u00b117)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9009",
+   "DV_03",
+   "CU_026",
+   "HHG-005"
+  ],
+  "fraud_pattern": [
+   "Velocity burst",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: legit",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "legit",
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-004",
+   "HHG-005",
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-010",
+  "transaction": "TX_9010",
+  "customer": "CU_026",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.63,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9010: $137.4, device DV_03, bank risk 0.63"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $51\u00b127, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "3 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW + MONITOR)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.2,
+    "text": "Amount 137.4 is 3.2\u03c3 above the customer's normal (51\u00b127)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9010",
+   "DV_03",
+   "CU_038",
+   "HHG-004",
+   "HHG-009"
+  ],
+  "fraud_pattern": [
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.78,
+  "uncertainty_before": "Medium",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-005",
+   "HHG-004",
+   "HHG-009",
+   "H-106",
+   "H-107"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-011",
+  "transaction": "TX_9011",
+  "customer": "CU_008",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.83,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9011: $255, device DV_07, bank risk 0.83"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $51\u00b133, 2 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_07: 7 other customers; DV_09: 2 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "8 customers: CU_005, CU_006, CU_007, CU_008, CU_009"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "5 closed cases (4 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Potential fraud ring, Velocity burst, Connected to confirmed fraud, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-12 (1.61), P-21 (0.518)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "4 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 255 is 6.2\u03c3 above the customer's normal (51\u00b133)."
+   },
+   {
+    "key": "device",
+    "cat": "Device analysis",
+    "weight": 0.3,
+    "text": "Device DV_07 is linked to 7 other customers."
+   },
+   {
+    "key": "prior",
+    "cat": "Historical cases",
+    "weight": 0.25,
+    "text": "4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9011",
+   "DV_07",
+   "CU_005",
+   "H-101"
+  ],
+  "fraud_pattern": [
+   "Potential fraud ring",
+   "Velocity burst",
+   "Connected to confirmed fraud",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.93,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst \u2192 Team lead",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": true,
+  "sar": {
+   "sar_id": "SAR-HHG-011",
+   "status": "Draft generated (simulated)",
+   "subject": "CU_008",
+   "narrative": "Suspicious activity related to transaction TX_9011 ($255). Device DV_07 is linked to 7 other customers. Amount 255 is 6.2\u03c3 above the customer's normal (51\u00b133). 4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108). 4 transactions in the last hour (baseline \u22481).",
+   "reference": "Bank Secrecy Act, 31 CFR 1020.320"
+  },
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-101",
+   "H-102",
+   "H-103",
+   "H-106",
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-012",
+  "transaction": "TX_9012",
+  "customer": "CU_017",
+  "trigger": "Risk score",
+  "bank_risk_score": 0.94,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder DENIED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9012: $476, device DV_13, bank risk 0.94"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_06: 2 other customers; DV_13: 0 other customers; DV_14: 0 other customers; DV_15: 0 other customers"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $68\u00b129, 4 known device(s)"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "0 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Account takeover, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-21 (0.518), P-09 (0.167)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "2 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "auth",
+    "cat": "Customer history",
+    "weight": 0.15,
+    "text": "4 failed authentication attempts before the transaction."
+   },
+   {
+    "key": "newdev",
+    "cat": "Device analysis",
+    "weight": 0.1,
+    "text": "Device DV_13 had never been used by this customer before."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": 0.35,
+    "text": "Cardholder DENIED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 476 is 14.1\u03c3 above the customer's normal (68\u00b129)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9012",
+   "DV_13"
+  ],
+  "fraud_pattern": [
+   "Account takeover",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: fraud",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "fraud",
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.97,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-104",
+   "H-105"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-013",
+  "transaction": "TX_9013",
+  "customer": "CU_035",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.8,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9013: $84.7, device DV_12, bank risk 0.8"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $77\u00b135, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_12: 2 other customers"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "2 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "no known pattern"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "2 similar closed cases"
+   }
+  ],
+  "graph_evidence": [],
+  "connected_entities": [
+   "TX_9013",
+   "DV_12"
+  ],
+  "fraud_pattern": [
+   "Likely legitimate"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-003",
+   "HHG-008"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-014",
+  "transaction": "TX_9014",
+  "customer": "CU_038",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.75,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder CONFIRMED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9014: $325.0, device DV_03, bank risk 0.75"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $130\u00b117, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "4 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Velocity burst, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "6 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": -0.5,
+    "text": "Cardholder CONFIRMED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 325.0 is 11.5\u03c3 above the customer's normal (130\u00b117)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9014",
+   "DV_03",
+   "CU_026",
+   "HHG-005",
+   "HHG-010"
+  ],
+  "fraud_pattern": [
+   "Velocity burst",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: legit",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "legit",
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-004",
+   "HHG-009",
+   "HHG-005",
+   "HHG-010",
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-015",
+  "transaction": "TX_9015",
+  "customer": "CU_026",
+  "trigger": "Risk score",
+  "bank_risk_score": 0.63,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9015: $137.4, device DV_03, bank risk 0.63"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $51\u00b127, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "5 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW + MONITOR)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.2,
+    "text": "Amount 137.4 is 3.2\u03c3 above the customer's normal (51\u00b127)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9015",
+   "DV_03",
+   "CU_038",
+   "HHG-004",
+   "HHG-009",
+   "HHG-014"
+  ],
+  "fraud_pattern": [
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.78,
+  "uncertainty_before": "Medium",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-005",
+   "HHG-010",
+   "HHG-004",
+   "HHG-009",
+   "HHG-014"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-016",
+  "transaction": "TX_9016",
+  "customer": "CU_005",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.84,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9016: $670, device DV_07, bank risk 0.84"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $134\u00b118, 2 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_06: 2 other customers; DV_07: 7 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "8 customers: CU_005, CU_006, CU_007, CU_008, CU_009"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "5 closed cases (4 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Potential fraud ring, Velocity burst, Connected to confirmed fraud, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-12 (1.61), P-21 (0.518)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "4 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 670 is 29.8\u03c3 above the customer's normal (134\u00b118)."
+   },
+   {
+    "key": "device",
+    "cat": "Device analysis",
+    "weight": 0.3,
+    "text": "Device DV_07 is linked to 7 other customers."
+   },
+   {
+    "key": "prior",
+    "cat": "Historical cases",
+    "weight": 0.25,
+    "text": "4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9016",
+   "DV_07",
+   "CU_006",
+   "H-102"
+  ],
+  "fraud_pattern": [
+   "Potential fraud ring",
+   "Velocity burst",
+   "Connected to confirmed fraud",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.93,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.93,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst \u2192 Team lead"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst \u2192 Team lead",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": true,
+  "sar": {
+   "sar_id": "SAR-HHG-016",
+   "status": "Draft generated (simulated)",
+   "subject": "CU_005",
+   "narrative": "Suspicious activity related to transaction TX_9016 ($670). Device DV_07 is linked to 7 other customers. Amount 670 is 29.8\u03c3 above the customer's normal (134\u00b118). 4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108). 4 transactions in the last hour (baseline \u22481).",
+   "reference": "Bank Secrecy Act, 31 CFR 1020.320"
+  },
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-101",
+   "H-102",
+   "H-103",
+   "H-106",
+   "H-108"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-017",
+  "transaction": "TX_9017",
+  "customer": "CU_017",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.94,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder DENIED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9017: $476, device DV_15, bank risk 0.94"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_06: 2 other customers; DV_13: 0 other customers; DV_14: 0 other customers; DV_15: 0 other customers"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $68\u00b129, 4 known device(s)"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "0 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Account takeover, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+    "result": "P-17 (2.861), P-21 (0.518), P-09 (0.167)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "2 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "auth",
+    "cat": "Customer history",
+    "weight": 0.15,
+    "text": "4 failed authentication attempts before the transaction."
+   },
+   {
+    "key": "newdev",
+    "cat": "Device analysis",
+    "weight": 0.1,
+    "text": "Device DV_15 had never been used by this customer before."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": 0.35,
+    "text": "Cardholder DENIED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 476 is 14.1\u03c3 above the customer's normal (68\u00b129)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9017",
+   "DV_15"
+  ],
+  "fraud_pattern": [
+   "Account takeover",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "HIGH",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: fraud",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "fraud",
+  "nba_after": {
+   "action": "TEMPORARY CARD BLOCK",
+   "risk": "HIGH",
+   "confidence": 0.97,
+   "approval": {
+    "required": true,
+    "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+    "policy_id": "P-17",
+    "route": "Fraud analyst"
+   }
+  },
+  "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+  "approval_route": "Fraud analyst",
+  "final_decision": "Awaiting analyst approval",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+  "similar_cases_used": [
+   "H-104",
+   "H-105"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-018",
+  "transaction": "TX_9018",
+  "customer": "CU_035",
+  "trigger": "Risk score",
+  "bank_risk_score": 0.8,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9018: $84.7, device DV_12, bank risk 0.8"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $77\u00b135, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_12: 2 other customers"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "3 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "no known pattern"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "3 similar closed cases"
+   }
+  ],
+  "graph_evidence": [],
+  "connected_entities": [
+   "TX_9018",
+   "DV_12"
+  ],
+  "fraud_pattern": [
+   "Likely legitimate"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "Low",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-003",
+   "HHG-008",
+   "HHG-013"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-019",
+  "transaction": "TX_9019",
+  "customer": "CU_038",
+  "trigger": "Customer report",
+  "bank_risk_score": 0.76,
+  "investigation_steps": [
+   {
+    "tool": "cardholder_verification",
+    "why": "Controlled evidence request answered (simulated)",
+    "result": "Cardholder CONFIRMED the transaction"
+   },
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9019: $325.0, device DV_03, bank risk 0.76"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $130\u00b117, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "6 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Velocity burst, Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "velocity",
+    "cat": "Transaction behavior",
+    "weight": 0.15,
+    "text": "6 transactions in the last hour (baseline \u22481)."
+   },
+   {
+    "key": "verify",
+    "cat": "Cardholder verification",
+    "weight": -0.5,
+    "text": "Cardholder CONFIRMED the transaction."
+   },
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.25,
+    "text": "Amount 325.0 is 11.5\u03c3 above the customer's normal (130\u00b117)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9019",
+   "DV_03",
+   "CU_026",
+   "HHG-005",
+   "HHG-010",
+   "HHG-015"
+  ],
+  "fraud_pattern": [
+   "Velocity burst",
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.97,
+  "uncertainty_before": "High",
+  "missing_evidence": [
+   "Cardholder verification",
+   "Device ownership confirmation"
+  ],
+  "additional_evidence_requested": "Cardholder verification (step-up) - simulated response: legit",
+  "nba_before": {
+   "action": "REQUEST STEP-UP AUTH",
+   "risk": "MEDIUM",
+   "confidence": 0.5,
+   "approval": {
+    "required": false,
+    "policy": "P-09: When evidence is inconclusive, request step-up authentication or cardholder verification before any block.",
+    "policy_id": "P-09",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": "legit",
+  "nba_after": {
+   "action": "ALLOW",
+   "risk": "LOW",
+   "confidence": 0.97,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-004",
+   "HHG-009",
+   "HHG-014",
+   "HHG-005",
+   "HHG-010"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ },
+ {
+  "case_id": "HHG-020",
+  "transaction": "TX_9020",
+  "customer": "CU_026",
+  "trigger": "Analyst request",
+  "bank_risk_score": 0.66,
+  "investigation_steps": [
+   {
+    "tool": "get_transaction_context",
+    "why": "Start by examining the flagged transaction",
+    "result": "TX_9020: $137.4, device DV_03, bank risk 0.66"
+   },
+   {
+    "tool": "get_customer_history",
+    "why": "Need the customer's baseline to judge amount and behaviour",
+    "result": "baseline $51\u00b127, 1 known device(s)"
+   },
+   {
+    "tool": "find_shared_devices",
+    "why": "Check whether this device is shared with other customers",
+    "result": "DV_03: 3 other customers"
+   },
+   {
+    "tool": "find_connected_customers",
+    "why": "The device links several customers - identify them",
+    "result": "4 customers: CU_002, CU_014, CU_026, CU_038"
+   },
+   {
+    "tool": "find_prior_cases",
+    "why": "Have these customers appeared in prior investigations?",
+    "result": "7 closed cases (0 confirmed fraud)"
+   },
+   {
+    "tool": "find_fraud_patterns",
+    "why": "Match the evidence against known fraud patterns",
+    "result": "Behavior deviation"
+   },
+   {
+    "tool": "search_policy",
+    "why": "GraphRAG: retrieve policy for the candidate action (ALLOW + MONITOR)",
+    "result": "P-02 (1.38), P-09 (0.0), P-12 (0.0)"
+   },
+   {
+    "tool": "find_similar_cases",
+    "why": "Case memory: retrieve similar closed investigations",
+    "result": "5 similar closed cases"
+   }
+  ],
+  "graph_evidence": [
+   {
+    "key": "amount",
+    "cat": "Transaction behavior",
+    "weight": 0.2,
+    "text": "Amount 137.4 is 3.2\u03c3 above the customer's normal (51\u00b127)."
+   }
+  ],
+  "connected_entities": [
+   "TX_9020",
+   "DV_03",
+   "CU_038",
+   "HHG-004",
+   "HHG-009",
+   "HHG-014",
+   "HHG-019"
+  ],
+  "fraud_pattern": [
+   "Behavior deviation"
+  ],
+  "risk_assessment": "LOW",
+  "confidence": 0.78,
+  "uncertainty_before": "Medium",
+  "missing_evidence": [],
+  "additional_evidence_requested": "None needed",
+  "nba_before": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "additional_evidence": null,
+  "nba_after": {
+   "action": "ALLOW + MONITOR",
+   "risk": "LOW",
+   "confidence": 0.78,
+   "approval": {
+    "required": false,
+    "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+    "policy_id": "P-02",
+    "route": "None (auto-execute)"
+   }
+  },
+  "policy": "P-02: Transactions consistent with the customer's behaviour are allowed. Monitor the account when residual risk exists.",
+  "approval_route": "None (auto-execute)",
+  "final_decision": "Closed (auto-executed (simulated))",
+  "sar_required": false,
+  "sar": null,
+  "case_memory_update": "Case stored in graph as Closed (auto-executed (simulated)); outcome 'Cleared' available to future investigations",
+  "similar_cases_used": [
+   "HHG-005",
+   "HHG-010",
+   "HHG-015",
+   "HHG-004",
+   "HHG-009"
+  ],
+  "written_to_graph": true,
+  "graph_backend": "local (in-memory)"
+ }
+]

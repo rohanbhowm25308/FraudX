@@ -1,0 +1,48 @@
+// FraudX graph schema + installed GSQL queries (run by ingest.py; "Case" is a reserved word, so the vertex is FraudCase)
+CREATE VERTEX Customer(PRIMARY_ID id STRING, mean_amt DOUBLE, std_amt DOUBLE, n_tx INT) WITH primary_id_as_attribute="true"
+CREATE VERTEX Card(PRIMARY_ID id STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Account(PRIMARY_ID id STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Device(PRIMARY_ID id STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Transaction(PRIMARY_ID id STRING, amt DOUBLE, ts DOUBLE, bank_risk DOUBLE, fails INT, vel INT, new_dev INT) WITH primary_id_as_attribute="true"
+CREATE VERTEX FraudCase(PRIMARY_ID id STRING, tx_id STRING, cust_id STRING, trigger_type STRING, status STRING, risk STRING, confidence DOUBLE, pattern STRING, outcome STRING, summary STRING, is_benchmark BOOL, closed BOOL, bank_risk DOUBLE, state_json STRING, record_json STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Evidence(PRIMARY_ID id STRING, kind STRING, text STRING, weight DOUBLE) WITH primary_id_as_attribute="true"
+CREATE VERTEX CaseAction(PRIMARY_ID id STRING, action STRING, approval STRING, policy STRING, executed STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Pattern(PRIMARY_ID id STRING, name STRING, requires STRING, anyof STRING, descr STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Policy(PRIMARY_ID id STRING, title STRING, body STRING, tags STRING) WITH primary_id_as_attribute="true"
+CREATE DIRECTED EDGE OWNS(FROM Customer, TO Card) WITH REVERSE_EDGE="rev_OWNS"
+CREATE DIRECTED EDGE USES_DEVICE(FROM Customer, TO Device) WITH REVERSE_EDGE="rev_USES_DEVICE"
+CREATE DIRECTED EDGE MADE(FROM Customer, TO Transaction) WITH REVERSE_EDGE="rev_MADE"
+CREATE DIRECTED EDGE HAS_ACCOUNT(FROM Customer, TO Account)
+CREATE DIRECTED EDGE TX_CARD(FROM Transaction, TO Card)
+CREATE DIRECTED EDGE TX_DEVICE(FROM Transaction, TO Device)
+CREATE DIRECTED EDGE HAS_CASE(FROM Customer, TO FraudCase) WITH REVERSE_EDGE="rev_HAS_CASE"
+CREATE DIRECTED EDGE FOR_TX(FROM FraudCase, TO Transaction)
+CREATE DIRECTED EDGE HAS_EVIDENCE(FROM FraudCase, TO Evidence)
+CREATE DIRECTED EDGE RESULTED_IN(FROM FraudCase, TO CaseAction)
+CREATE DIRECTED EDGE MATCHES_PATTERN(FROM FraudCase, TO Pattern)
+CREATE DIRECTED EDGE CITES_POLICY(FROM FraudCase, TO Policy)
+CREATE GRAPH FraudX(*)
+USE GRAPH FraudX
+CREATE OR REPLACE QUERY tx_context(VERTEX<Transaction> t) FOR GRAPH FraudX SYNTAX v2 {
+  Start = {t};
+  C = SELECT c FROM Start:s -(rev_MADE>)- Customer:c;
+  D = SELECT d FROM Start:s -(TX_DEVICE>)- Device:d;
+  K = SELECT k FROM Start:s -(TX_CARD>)- Card:k;
+  PRINT Start, C, D, K;
+}
+CREATE OR REPLACE QUERY devices_of_customer(VERTEX<Customer> c) FOR GRAPH FraudX SYNTAX v2 {
+  Start = {c};
+  D = SELECT d FROM Start:s -(USES_DEVICE>)- Device:d;
+  PRINT D;
+}
+CREATE OR REPLACE QUERY customers_on_device(VERTEX<Device> d) FOR GRAPH FraudX SYNTAX v2 {
+  Start = {d};
+  O = SELECT c FROM Start:s -(rev_USES_DEVICE>)- Customer:c;
+  PRINT O;
+}
+CREATE OR REPLACE QUERY closed_cases(SET<VERTEX<Customer>> cs) FOR GRAPH FraudX SYNTAX v2 {
+  Start = {cs};
+  K = SELECT k FROM Start:s -(HAS_CASE>)- FraudCase:k WHERE k.closed == TRUE;
+  PRINT K;
+}
+INSTALL QUERY ALL

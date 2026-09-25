@@ -1,0 +1,136 @@
+{
+ "case_id": "HHG-006",
+ "transaction": "TX_9006",
+ "customer": "CU_005",
+ "trigger": "Risk score",
+ "bank_risk_score": 0.91,
+ "investigation_steps": [
+  {
+   "tool": "get_transaction_context",
+   "why": "Start by examining the flagged transaction",
+   "result": "TX_9006: $670, device DV_07, bank risk 0.91"
+  },
+  {
+   "tool": "find_shared_devices",
+   "why": "Check whether this device is shared with other customers",
+   "result": "DV_06: 2 other customers; DV_07: 7 other customers"
+  },
+  {
+   "tool": "find_connected_customers",
+   "why": "The device links several customers - identify them",
+   "result": "8 customers: CU_005, CU_006, CU_007, CU_008, CU_009"
+  },
+  {
+   "tool": "find_prior_cases",
+   "why": "Have these customers appeared in prior investigations?",
+   "result": "5 closed cases (4 confirmed fraud)"
+  },
+  {
+   "tool": "get_customer_history",
+   "why": "Need the customer's baseline to judge amount and behaviour",
+   "result": "baseline $134\u00b118, 2 known device(s)"
+  },
+  {
+   "tool": "find_fraud_patterns",
+   "why": "Match the evidence against known fraud patterns",
+   "result": "Potential fraud ring, Velocity burst, Connected to confirmed fraud, Behavior deviation"
+  },
+  {
+   "tool": "search_policy",
+   "why": "GraphRAG: retrieve policy for the candidate action (TEMPORARY CARD BLOCK)",
+   "result": "P-17 (2.861), P-12 (1.61), P-21 (0.518)"
+  },
+  {
+   "tool": "find_similar_cases",
+   "why": "Case memory: retrieve similar closed investigations",
+   "result": "5 similar closed cases"
+  }
+ ],
+ "graph_evidence": [
+  {
+   "key": "velocity",
+   "cat": "Transaction behavior",
+   "weight": 0.15,
+   "text": "4 transactions in the last hour (baseline \u22481)."
+  },
+  {
+   "key": "device",
+   "cat": "Device analysis",
+   "weight": 0.3,
+   "text": "Device DV_07 is linked to 7 other customers."
+  },
+  {
+   "key": "prior",
+   "cat": "Historical cases",
+   "weight": 0.25,
+   "text": "4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108)."
+  },
+  {
+   "key": "amount",
+   "cat": "Transaction behavior",
+   "weight": 0.25,
+   "text": "Amount 670 is 29.8\u03c3 above the customer's normal (134\u00b118)."
+  }
+ ],
+ "connected_entities": [
+  "TX_9006",
+  "DV_07",
+  "CU_006",
+  "H-102"
+ ],
+ "fraud_pattern": [
+  "Potential fraud ring",
+  "Velocity burst",
+  "Connected to confirmed fraud",
+  "Behavior deviation"
+ ],
+ "risk_assessment": "HIGH",
+ "confidence": 0.93,
+ "uncertainty_before": "Low",
+ "missing_evidence": [],
+ "additional_evidence_requested": "None needed",
+ "nba_before": {
+  "action": "TEMPORARY CARD BLOCK",
+  "risk": "HIGH",
+  "confidence": 0.93,
+  "approval": {
+   "required": true,
+   "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+   "policy_id": "P-17",
+   "route": "Fraud analyst \u2192 Team lead"
+  }
+ },
+ "additional_evidence": null,
+ "nba_after": {
+  "action": "TEMPORARY CARD BLOCK",
+  "risk": "HIGH",
+  "confidence": 0.93,
+  "approval": {
+   "required": true,
+   "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+   "policy_id": "P-17",
+   "route": "Fraud analyst \u2192 Team lead"
+  }
+ },
+ "policy": "P-17: A temporary card block requires fraud analyst approval before execution.",
+ "approval_route": "Fraud analyst \u2192 Team lead",
+ "final_decision": "Awaiting analyst approval",
+ "sar_required": true,
+ "sar": {
+  "sar_id": "SAR-HHG-006",
+  "status": "Draft generated (simulated)",
+  "subject": "CU_005",
+  "narrative": "Suspicious activity related to transaction TX_9006 ($670). Device DV_07 is linked to 7 other customers. 4 confirmed fraud case(s) among this customer and connected customers (H-101, H-102, H-103, H-108). Amount 670 is 29.8\u03c3 above the customer's normal (134\u00b118). 4 transactions in the last hour (baseline \u22481).",
+  "reference": "Bank Secrecy Act, 31 CFR 1020.320"
+ },
+ "case_memory_update": "Case stored in graph as Awaiting analyst approval; memory update pending analyst approval",
+ "similar_cases_used": [
+  "H-101",
+  "H-102",
+  "H-103",
+  "H-106",
+  "H-108"
+ ],
+ "written_to_graph": true,
+ "graph_backend": "local (in-memory)"
+}
