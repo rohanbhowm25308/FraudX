@@ -8,15 +8,14 @@
   An AI-powered fraud investigation platform that combines graph intelligence, agentic investigation, evidence analysis, GraphRAG, case memory, and policy-aware next-best actions.
 </p>
 
-<p align="center">
+# 🌐 Live Demo
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge\&logo=python)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-Web%20App-black?style=for-the-badge\&logo=flask)](https://flask.palletsprojects.com/)
-[![TigerGraph](https://img.shields.io/badge/TigerGraph-Graph%20Intelligence-00A6A6?style=for-the-badge)](https://www.tigergraph.com/)
-[![MCP](https://img.shields.io/badge/MCP-Agent%20Tools-purple?style=for-the-badge)](https://modelcontextprotocol.io/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](#license)
+**Try FraudX:**
+https://fraudx-ngul.onrender.com/
 
-</p>
+**Source Code:**
+https://github.com/rohanbhowm25308/FraudX
+
 
 <p align="center">
   <a href="https://github.com/rohanbhowm25308/FraudX">GitHub Repository</a> •
@@ -559,16 +558,6 @@ Combine evidence, historical cases, policy, and uncertainty.
 ###  Decide
 
 Recommend a defensible next-best action with the appropriate approval path.
-
----
-
-# 🌐 Live Demo
-
-**Try FraudX:**
-https://fraudx-agentic-fraud-investigation.onrender.com
-
-**Source Code:**
-https://github.com/rohanbhowm25308/FraudX
 
 ---
 
