@@ -17,11 +17,6 @@ https://fraudx-ngul.onrender.com/
 https://github.com/rohanbhowm25308/FraudX
 
 
-<p align="center">
-  <a href="https://github.com/rohanbhowm25308/FraudX">GitHub Repository</a> •
-  <a href="https://fraudx-agentic-fraud-investigation.onrender.com">Live Demo</a>
-</p>
-
 ---
 
 ## 🔎 What is FraudX?
